@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Archives
+*.zip
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Database
+*.db
+expense_tracker.db
+
+# Claude
+.claude/plans/
