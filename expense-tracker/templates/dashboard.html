@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — Spendwise{% endblock %}
+
+{% block content %}
+<section class="app-page">
+
+    <div class="page-head">
+        <div>
+            <h1 class="page-title">Your expenses</h1>
+            <p class="page-sub">
+                {% if current_user %}Welcome back, {{ current_user['name'].split()[0] }}.{% endif %}
+                Here's where your money is going.
+            </p>
+        </div>
+        <a href="{{ url_for('add_expense') }}" class="btn-primary">+ Add expense</a>
+    </div>
+
+    <div class="stat-row">
+        <div class="stat-card">
+            <span class="stat-label">Total spent</span>
+            <span class="stat-value">{{ total | rupees }}</span>
+            <span class="stat-meta">across {{ expenses | length }} transaction{{ '' if expenses|length == 1 else 's' }}</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Transactions</span>
+            <span class="stat-value">{{ expenses | length }}</span>
+            <span class="stat-meta">logged so far</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Top category</span>
+            <span class="stat-value">{{ by_category[0]['category'] if by_category else '—' }}</span>
+            <span class="stat-meta">{{ (by_category[0]['total'] | rupees) if by_category else 'nothing yet' }}</span>
+        </div>
+    </div>
+
+    {% if expenses %}
+
+    {% set max_cat = (by_category | map(attribute='total') | max) %}
+    <div class="panel">
+        <h2 class="panel-title">Spending by category</h2>
+        <div class="breakdown">
+            {% for row in by_category %}
+            <div class="breakdown-row">
+                <span class="breakdown-label">{{ row['category'] }}</span>
+                <div class="breakdown-track">
+                    <div class="breakdown-bar cat-color-{{ loop.index0 % 7 }}"
+                         style="width: {{ ((row['total'] / max_cat) * 100) | round(1) }}%"></div>
+                </div>
+                <span class="breakdown-amt">{{ row['total'] | rupees }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2 class="panel-title">All expenses</h2>
+        <div class="table-wrap">
+            <table class="expense-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th class="num">Amount</th>
+                        <th class="actions-col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in expenses %}
+                    <tr>
+                        <td data-label="Date">{{ e['spent_on'] | prettydate }}</td>
+                        <td data-label="Category">
+                            <span class="tag">{{ e['category'] }}</span>
+                        </td>
+                        <td data-label="Description">{{ e['description'] or '—' }}</td>
+                        <td data-label="Amount" class="num">{{ e['amount'] | rupees }}</td>
+                        <td data-label="Actions" class="actions-col">
+                            <a href="{{ url_for('edit_expense', id=e['id']) }}" class="link-action">Edit</a>
+                            <form method="POST"
+                                  action="{{ url_for('delete_expense', id=e['id']) }}"
+                                  class="inline-form"
+                                  data-confirm="Delete this expense? This cannot be undone.">
+                                <button type="submit" class="link-action link-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+        <div class="empty-icon">₹</div>
+        <h2 class="empty-title">No expenses yet</h2>
+        <p class="empty-body">Add your first expense to start seeing where your money goes.</p>
+        <a href="{{ url_for('add_expense') }}" class="btn-primary">+ Add your first expense</a>
+    </div>
+
+    {% endif %}
+
+</section>
+{% endblock %}

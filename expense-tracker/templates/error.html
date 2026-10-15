@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ code }} — Spendwise{% endblock %}
+
+{% block content %}
+<section class="app-page">
+    <div class="empty-state">
+        <div class="empty-icon">{{ code }}</div>
+        <h2 class="empty-title">{{ message }}</h2>
+        <p class="empty-body">The page you're looking for isn't here.</p>
+        <a href="{{ url_for('landing') }}" class="btn-primary">Back to home</a>
+    </div>
+</section>
+{% endblock %}

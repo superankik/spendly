@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Profile — Spendwise{% endblock %}
+
+{% block content %}
+<section class="app-page app-page-narrow">
+
+    <div class="page-head">
+        <div>
+            <h1 class="page-title">Your profile</h1>
+            <p class="page-sub">Account details and a snapshot of your activity.</p>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="profile-grid">
+            <div class="profile-field">
+                <span class="profile-label">Name</span>
+                <span class="profile-value">{{ user['name'] }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="profile-label">Email</span>
+                <span class="profile-value">{{ user['email'] }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="profile-label">Member since</span>
+                <span class="profile-value">{{ (user['created_at'][:10]) | prettydate }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="profile-label">Total logged</span>
+                <span class="profile-value">{{ stats['total'] | rupees }}</span>
+            </div>
+            <div class="profile-field">
+                <span class="profile-label">Transactions</span>
+                <span class="profile-value">{{ stats['count'] }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-form">
+        <h2 class="panel-title">Change password</h2>
+        <form method="POST" action="{{ url_for('profile') }}">
+            <div class="form-group">
+                <label for="current_password">Current password</label>
+                <input type="password" id="current_password" name="current_password"
+                       class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="new_password">New password</label>
+                <input type="password" id="new_password" name="new_password"
+                       class="form-input" placeholder="Min. 8 characters" required>
+            </div>
+            <button type="submit" class="btn-submit">Update password</button>
+        </form>
+    </div>
+
+</section>
+{% endblock %}
