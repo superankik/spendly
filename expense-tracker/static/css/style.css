@@ -848,3 +848,288 @@ a { color: inherit; text-decoration: none; }
 }
 
 .video-modal-close:hover { background: rgba(0, 0, 0, 0.85); }
+
+/* ================================================================== */
+/* Flash messages                                                      */
+/* ================================================================== */
+
+.flash-wrap {
+    max-width: var(--max-width);
+    margin: 1.25rem auto 0;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.flash {
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+
+.flash-success {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: #bcd6c6;
+}
+
+.flash-error {
+    background: var(--danger-light);
+    color: var(--danger);
+    border-color: #f5c6c2;
+}
+
+/* ================================================================== */
+/* Dashboard                                                           */
+/* ================================================================== */
+
+.dash-page {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+}
+
+.dash-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.dash-title {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    color: var(--ink);
+    line-height: 1.1;
+}
+
+.dash-sub {
+    margin-top: 0.4rem;
+    font-size: 0.95rem;
+    color: var(--ink-muted);
+}
+
+/* --- Summary cards ------------------------------------------------ */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.4rem 1.5rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+}
+
+.stat-value {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    color: var(--ink);
+    line-height: 1.1;
+}
+
+.stat-foot {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+}
+
+/* --- Panels ------------------------------------------------------- */
+
+.panel {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    margin-bottom: 1.75rem;
+}
+
+.panel-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+}
+
+/* --- Category bars ------------------------------------------------ */
+
+.cat-bars { display: flex; flex-direction: column; gap: 1rem; }
+
+.cat-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 110px;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cat-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+}
+
+.cat-track {
+    height: 10px;
+    background: var(--border-soft);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.cat-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width 0.6s ease;
+}
+
+.cat-amt {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-align: right;
+}
+
+/* --- Expense table ------------------------------------------------ */
+
+.table-wrap { overflow-x: auto; }
+
+.expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+.expense-table th {
+    text-align: left;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    padding: 0 0.75rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.expense-table td {
+    padding: 0.85rem 0.75rem;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--ink-soft);
+    vertical-align: middle;
+}
+
+.expense-table tr:last-child td { border-bottom: none; }
+
+.expense-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.cat-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+}
+
+.actions-col { white-space: nowrap; }
+.actions-col.num { text-align: left; }
+
+.inline-form { display: inline; }
+
+.link-edit, .link-delete {
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: var(--font-body);
+}
+
+.link-edit { color: var(--accent); margin-right: 0.9rem; }
+.link-edit:hover { text-decoration: underline; }
+.link-delete { color: var(--danger); }
+.link-delete:hover { text-decoration: underline; }
+
+/* --- Empty state -------------------------------------------------- */
+
+.empty-state {
+    text-align: center;
+    padding: 2.5rem 1rem;
+}
+
+.empty-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+}
+
+.empty-body {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* --- Form helpers ------------------------------------------------- */
+
+.label-optional {
+    color: var(--ink-faint);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+select.form-input { appearance: none; cursor: pointer; background-color: var(--paper); }
+
+/* --- Profile ------------------------------------------------------ */
+
+.profile-list { display: flex; flex-direction: column; }
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.profile-row:last-child { border-bottom: none; }
+
+.profile-row dt {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+}
+
+.profile-row dd {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    text-align: right;
+}
+
+@media (max-width: 700px) {
+    .stat-grid { grid-template-columns: 1fr; }
+    .cat-row { grid-template-columns: 90px 1fr 90px; gap: 0.6rem; }
+    .flash-wrap { padding: 0 1.25rem; }
+    .dash-page { padding: 2rem 1.25rem 3rem; }
+}
