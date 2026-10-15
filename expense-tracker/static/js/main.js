@@ -15,7 +15,18 @@
         }
     });
 
-    // 2) Auto-dismiss flash messages after a few seconds.
+    // 2) Stop the mouse wheel / trackpad from changing a focused number input.
+    //    Otherwise scrolling the page while the cursor sits in the amount box
+    //    silently nudges the value by its step (e.g. 45000 -> 44999.95).
+    document.querySelectorAll('input[type="number"]').forEach(function (input) {
+        input.addEventListener("wheel", function (event) {
+            if (document.activeElement === input) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+    });
+
+    // 3) Auto-dismiss flash messages after a few seconds.
     var flashes = document.querySelectorAll(".flash");
     flashes.forEach(function (el) {
         setTimeout(function () {
